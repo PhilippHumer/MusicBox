@@ -1,0 +1,19 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="320"
+        Width="480" Height="320"
+        x:Class="GUI.MainWindow"
+        Title="GUI">
+  <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+      <Grid Name="MyGrid">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="25*"/>
+          <ColumnDefinition Width="25*"/>
+          <ColumnDefinition Width="25*"/>
+          <ColumnDefinition Width="25*"/>
+        </Grid.ColumnDefinitions>
+      </Grid>
+  </ScrollViewer>
+</Window>
