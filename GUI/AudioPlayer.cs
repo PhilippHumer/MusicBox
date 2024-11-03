@@ -1,14 +1,14 @@
 ﻿using System.Threading;
-using NAudio.Wave;
 using System.Diagnostics;
-using NAudio.Wave.SampleProviders;
+using LibVLCSharp.Shared;
+using System;
 
 namespace GUI
 {
     public static class AudioPlayer
     {
-        private static WaveOutEvent? outputDevice;
         private static Thread? audioThread;
+        private static MediaPlayer? mediaPlayer;
 
         public static void Play(string filePath)
         {
@@ -23,15 +23,17 @@ namespace GUI
 
         private static void PlayImpl(string filePath) 
         {
-            outputDevice = new WaveOutEvent();
-            outputDevice?.Init(new FadeInOutSampleProvider(new AudioFileReader(filePath)));
-            outputDevice?.Play();
+            Core.Initialize();
+            LibVLC libVLC = new LibVLC();
+            mediaPlayer = new MediaPlayer(libVLC);
+            mediaPlayer.Media = new Media(libVLC, new Uri(filePath));
+            mediaPlayer.Play();
             Trace.WriteLine("Done playing");
         }
 
         private static void StopImpl()
         {
-            outputDevice?.Stop();
+            mediaPlayer?.Stop();
             audioThread?.Join();
             Trace.WriteLine("Stopped playing");
         }
