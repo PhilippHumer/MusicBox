@@ -6,14 +6,38 @@
         Width="480" Height="320"
         x:Class="GUI.MainWindow"
         Title="GUI">
-  <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-      <Grid Name="MyGrid">
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="25*"/>
-          <ColumnDefinition Width="25*"/>
-          <ColumnDefinition Width="25*"/>
-          <ColumnDefinition Width="25*"/>
-        </Grid.ColumnDefinitions>
-      </Grid>
-  </ScrollViewer>
+  <Grid Name="Main">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="40"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+    <Grid Grid.Row="0" Name="Header">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="70*"/>
+        <ColumnDefinition Width="20*"/>
+        <ColumnDefinition Width="10*"/>
+      </Grid.ColumnDefinitions>
+      <TextBlock Grid.Column="0" 
+                 HorizontalAlignment="Stretch" 
+                 VerticalAlignment="Stretch"
+                 TextAlignment="Center"
+                 FontFamily="Curlz MT"
+                 FontSize="28"
+                 Background="#6b092a">
+        Frohe Weihnachten Melli&#x1F49D;
+      </TextBlock>
+      <Rectangle Grid.Column="1" Fill="#6b092a"></Rectangle>
+      <Button Grid.Column="2" 
+              HorizontalAlignment="Stretch" 
+              VerticalAlignment="Stretch"
+              BorderThickness="0"
+              CornerRadius="0"
+              Background="#6b092a">
+        &#xf030;
+      </Button>
+    </Grid>    
+    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <Grid Background="#6b092a" Name="MusicButtons"></Grid>
+    </ScrollViewer>
+  </Grid>
 </Window>

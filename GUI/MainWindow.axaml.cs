@@ -41,9 +41,14 @@ public partial class MainWindow : Window
 
     private void InitGrid()
     {
-        Grid? grid = this.FindControl<Grid>("MyGrid");
+        Grid? grid = this.FindControl<Grid>("MusicButtons");
         if (grid != null)
         {
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+
             int lastRow = -1;
             foreach (TrackInfoGridItem gridItem in TrackItemInfoList)
             {
@@ -60,13 +65,16 @@ public partial class MainWindow : Window
                     {
                         Source = new Avalonia.Media.Imaging.Bitmap(Constants.ResourcesLocation + gridItem.Item.JpgPath),
                         Stretch = Avalonia.Media.Stretch.Fill,
-                        Width = 116,
-                        Height = 116,
+                        Width = 118,
+                        Height = 118,
                     },
+                    CornerRadius = new Avalonia.CornerRadius(0),
                     Height = 120,
                     Width = 120,
-                    BorderThickness = new Avalonia.Thickness(2),
-                    BorderBrush = Brushes.Black
+                    BorderThickness = new Avalonia.Thickness(1),
+
+                    // Replace the problematic line with the following:
+                    BorderBrush = new SolidColorBrush(Color.Parse("#6b092a"))
                 };
                 button.Click += OnClick;
                 Grid.SetRow(button, gridItem.Row);
