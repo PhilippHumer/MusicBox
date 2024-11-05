@@ -9,16 +9,20 @@ namespace GUI
     {
         private static Thread? audioThread;
         private static MediaPlayer? mediaPlayer;
+        private static readonly Object _lock = new();
 
         public static void Play(string filePath)
         {
-            if (audioThread != null)
-                StopImpl();
-           
-            audioThread = new Thread(() => { 
-                PlayImpl(filePath); 
-            });
-            audioThread.Start();
+            lock (_lock)
+            {
+                if (audioThread != null)
+                    StopImpl();
+
+                audioThread = new Thread(() => {
+                    PlayImpl(filePath);
+                });
+                audioThread.Start();
+            }
         }
 
         private static void PlayImpl(string filePath) 

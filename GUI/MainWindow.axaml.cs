@@ -84,7 +84,7 @@ public partial class MainWindow : Window
         }
     }
 
-    private void OnClick(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+    private void OnClick(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
         Button? button = sender as Button;
         TrackInfoItem? track = TrackItemInfoList?.ToList()?.Find(gridItem => gridItem.Item.Title == button?.Name)?.Item;
