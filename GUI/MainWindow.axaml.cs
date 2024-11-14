@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Media;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -12,11 +13,13 @@ namespace GUI;
 public partial class MainWindow : Window
 {
     public ObservableCollection<TrackInfoGridItem> TrackItemInfoList { get; set; }
+    public IObservable<uint> Volume { get; set; }
 
     public MainWindow()
     {
         InitializeComponent();
         TrackItemInfoList = new ObservableCollection<TrackInfoGridItem>();
+
 
         InitGridItems();
         InitGrid();
@@ -31,7 +34,7 @@ public partial class MainWindow : Window
         foreach (var item in JsonSerializer.Deserialize<List<TrackInfoItem>>(json))
         {
             TrackItemInfoList.Add(new TrackInfoGridItem(rowCnt, colCnt++, item));
-            if (colCnt == 4)
+            if (colCnt == Constants.LayoutColumns)
             {
                 colCnt = 0;
                 rowCnt++;
@@ -44,17 +47,17 @@ public partial class MainWindow : Window
         Grid? grid = this.FindControl<Grid>("MusicButtons");
         if (grid != null)
         {
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            for (int i = 0; i < Constants.LayoutColumns; i++)
+            {
+                grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            }
 
             int lastRow = -1;
             foreach (TrackInfoGridItem gridItem in TrackItemInfoList)
             {
                 if (lastRow != gridItem.Row)
                 {
-                    grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(120) });
+                    grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(Constants.WindowWidth/Constants.LayoutColumns) });
                     lastRow = gridItem.Row;
                 }
 
@@ -65,15 +68,15 @@ public partial class MainWindow : Window
                     {
                         Source = new Avalonia.Media.Imaging.Bitmap(Constants.ResourcesLocation + gridItem.Item.JpgPath),
                         Stretch = Avalonia.Media.Stretch.Fill,
-                        Width = 118,
-                        Height = 118,
+                        HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Stretch,
+                        VerticalAlignment = Avalonia.Layout.VerticalAlignment.Stretch
+                        //Width = 118,
+                        //Height = 118,
                     },
                     CornerRadius = new Avalonia.CornerRadius(0),
-                    Height = 120,
-                    Width = 120,
+                    Height = Constants.WindowWidth / Constants.LayoutColumns,
+                    Width = Constants.WindowWidth / Constants.LayoutColumns,
                     BorderThickness = new Avalonia.Thickness(1),
-
-                    // Replace the problematic line with the following:
                     BorderBrush = new SolidColorBrush(Color.Parse("#6b092a"))
                 };
                 button.Click += OnClick;
@@ -94,4 +97,5 @@ public partial class MainWindow : Window
             AudioPlayer.Play(Constants.ResourcesLocation + track.Mp3Path);
         }
     } 
+
 }
