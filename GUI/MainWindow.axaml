@@ -26,7 +26,7 @@
                  FontFamily="Curlz MT"
                  FontSize="28"
                  Background="#6b092a">
-        Frohe Weihnachten Melli&#10084;
+        Frohe Weihnachten Melli &#10084;
       </TextBlock>
 	    <!--<Button Grid.Column="1"
 			    HorizontalAlignment="Stretch"
