@@ -4,7 +4,7 @@ namespace GUI
 {
     public class Constants
     {
-        public const string ResourcesLocation = "C:\\dev\\MusicBox\\Resources\\";
+        public const string ResourcesLocation = "D:\\git\\MusicBox\\Resources\\";
         public const string JsonDatabasePath = ResourcesLocation + "db.json";
         public const uint WindowHeight = 320;
         public const uint WindowWidth = 480;

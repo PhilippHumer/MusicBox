@@ -6,6 +6,7 @@
         mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="320"
         Width="480" Height="320"
         x:Class="GUI.MainWindow"
+        WindowState="FullScreen"
         Title="GUI">
   <Grid Name="Main">
     <Grid.RowDefinitions>
@@ -15,8 +16,8 @@
     <Grid Grid.Row="0" Name="Header">
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="80*"/>
-        <ColumnDefinition Width="10*"/>
-        <ColumnDefinition Width="10*"/>
+        <ColumnDefinition Width="0*"/>
+        <ColumnDefinition Width="0*"/>
       </Grid.ColumnDefinitions>
       <TextBlock Grid.Column="0" 
                  HorizontalAlignment="Stretch" 
@@ -27,7 +28,7 @@
                  Background="#6b092a">
         Frohe Weihnachten Melli&#x1F49D;
       </TextBlock>
-	    <Button Grid.Column="1"
+	    <!--<Button Grid.Column="1"
 			    HorizontalAlignment="Stretch"
 			    VerticalAlignment="Stretch"
 			    BorderThickness="0"
@@ -54,7 +55,7 @@
 		    Width="24"
 		    Height="24"
 			Kind="Bluetooth"/>
-      </Button>
+      </Button>-->
     </Grid>    
     <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
         <Grid Background="#6b092a" Name="MusicButtons"></Grid>
